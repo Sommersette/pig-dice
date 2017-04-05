@@ -64,6 +64,16 @@ $(function(){
 
     $("#userTotal").text("Total Score: " + aggregate);
     $("#userRoundScores").text("Turn Scores: " + playerScore);
+    if (aggregate >= 100) {
+      $(".rounds").hide();
+      $(".winner").show();
+    } else {
+      allPlayers[0].totalSubtotal = [];
+      $("#turn-total").show();
+      $("#zero").hide();
+      $("#turn-total, #subtotal, #roll-result").text("");
+    }
+
 
     allPlayers[0].totalSubtotal = [];
     $("#turn-total").show();

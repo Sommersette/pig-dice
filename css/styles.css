@@ -2,7 +2,7 @@
   border: 1px solid black;
 }*/
 
-.player1, #zero {
+.player1, #zero, .winner {
   display: none;
 }
 
