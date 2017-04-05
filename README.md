@@ -34,7 +34,7 @@ _ _
   - output: displays number with "-" between numbers
 
 * running total scoreboard
-  - input: total subtal added
+  - input: total subtotal added
   - output: replaces old score with new score
 
 * reach 100 - 105 (2 die variant +111)
