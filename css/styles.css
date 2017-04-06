@@ -2,7 +2,12 @@
   border: 1px solid black;
 }*/
 
-.player1, #zero, .winner {
+.player1,
+#zero,
+.winner,
+.name,
+button[name=button],
+input[name=roller] {
   display: none;
 }
 
@@ -12,4 +17,16 @@
 
 .userTotal {
   color: green;
+}
+
+img {
+  width: 100%;
+}
+
+#title-image {
+  width: 60%;
+}
+
+.jumbotron {
+  text-align: center;
 }

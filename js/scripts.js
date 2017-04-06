@@ -9,8 +9,10 @@ function Player(name, score, totalSubtotal) {
   this.score = [];
 };
 
-function rollDie() {
-  return Math.floor((Math.random() * 6) + 1);
+function rollDie(array) {
+  var result = Math.floor((Math.random() * 6) + 1);
+  array.push(result);
+  return result;
 };
 
 function userTotal(number, array){
@@ -39,12 +41,10 @@ function subTotal(array){
 
 
 $(function(){
-
-
-
   $("input[name=opponent]").click(function(){
     var newGame = new AllPlayers();
     var index = 1;
+    $(".name").show();
 
     $("button[name=start]").click(function(){
 
@@ -52,24 +52,26 @@ $(function(){
       var newPlayer = new Player(playerName, 0, 0);
       var arrayIndex = index - 1;
       newGame.players.push(newPlayer);
-      $(".user-name").append('<div class="player' + index + '">' +
+      $(".user-input").append('<div class="player' + index + '">' +
                                 '<input type="radio" name="roller" value="'  + arrayIndex + '">' +
                                 '<h2 class="player' + index + '-name"></h2>' +
                                 '<h3 class="userTotal"></h3>' +
                                 '<h3 class="userRoundScores"></h3>' +
                              '</div>');
-      $(`.player${index}-name`).text(newGame.players[arrayIndex].name); //replace allPlayers with newGame.players
-      // $(".user-name").hide();
-      $(`.player${index}`).show();
-      console.log(newGame);
+      $(`.player${index}-name`).text(newGame.players[arrayIndex].name);
+      $(`.player${index}, button[name=button]`).show();
       index++;
     });
 
+    $("button[name=button]").click(function(){
+      $(".user-name").hide();
+      $(".player1 input[name=roller]").attr("checked", true);
+    });
+
     $("button[name=roll]").click(function(){
-      var result = rollDie();
       var index = parseInt($("input[name=roller]:checked").val());
       var turnSubtotal = newGame.players[index].totalSubtotal;
-      turnSubtotal.push(result);
+      var result = rollDie(turnSubtotal);
       $("#roll-result").text(result);
       var turnTotal = subTotal(turnSubtotal);
       $("#subtotal").text(turnSubtotal);
@@ -79,6 +81,7 @@ $(function(){
     $("button[name=pass]").click(function() {
       var index = parseInt($("input[name=roller]:checked").val());
       var playerClass = index + 1;
+      var next = playerClass + 1;
       var turnSubtotal = newGame.players[index].totalSubtotal;
       var turnTotal = subTotal(turnSubtotal);
       var playerScore = newGame.players[index].score;
@@ -95,6 +98,15 @@ $(function(){
         $("#turn-total").show();
         $("#zero").hide();
         $("#turn-total, #subtotal, #roll-result").text("");
+        console.log(playerClass);
+        console.log(newGame.players.length);
+        if (playerClass < newGame.players.length) {
+          $(`.player${playerClass} input[name=roller]`).attr("checked", false);
+          $(`.player${next} input[name=roller]`).attr("checked", true);
+        } else {
+          $(`.player${playerClass} input[name=roller]`).attr("checked", false);
+          $(".player1 input[name=roller]").attr("checked", true);
+        }
       }
     });
   });
