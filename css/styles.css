@@ -1,6 +1,17 @@
-/** {
-  border: 1px solid black;
-}*/
+@font-face {
+    font-family: barnowl;
+    src: url(../fonts/barnowl.ttf);
+}
+@font-face {
+    font-family: woodcut;
+    src: url(../fonts/woodcut.ttf);
+}
+
+
+body {
+  font-family: woodcut;
+  background-image: url(../img/background.jpg);
+}
 
 .player1,
 #zero,
@@ -19,6 +30,26 @@ input[name=roller] {
   color: green;
 }
 
+.border {
+  border: 2px groove black;
+  border-radius: 10%;
+}
+
+.green {
+  background-image: url(../img/v2.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  margin-bottom: -5px;
+}
+
+.user-input span {
+  font-size: 28px;
+}
+
 img {
   width: 100%;
 }
@@ -29,4 +60,10 @@ img {
 
 .jumbotron {
   text-align: center;
+  font-family: barnowl, monospace;
+  /*background-color: maroon;*/
+}
+
+span.opponent {
+  font-size: 14px;
 }

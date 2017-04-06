@@ -32,13 +32,14 @@ function subTotal(array){
       subTotalResult = 0
       $("#turn-total, button[name=roll]").hide();
       $("#zero").show();
+      var audio = new Audio('media/porker.mp3');
+      audio.play();
     } else {
       subTotalResult += parseInt(array[i]);
     }
   }
   return subTotalResult;
 }
-
 
 $(function(){
   $("input[name=opponent]").click(function(){
@@ -54,7 +55,8 @@ $(function(){
       newGame.players.push(newPlayer);
       $(".user-input").append('<div class="player' + index + '">' +
                                 '<input type="radio" name="roller" value="'  + arrayIndex + '">' +
-                                '<h2 class="player' + index + '-name"></h2>' +
+                                '<div class="background"></div>' +
+                                '<span class="player' + index + '-name"></span>' +
                                 '<h3 class="userTotal"></h3>' +
                                 '<h3 class="userRoundScores"></h3>' +
                              '</div>');
@@ -66,6 +68,9 @@ $(function(){
     $("button[name=button]").click(function(){
       $(".user-name").hide();
       $(".player1 input[name=roller]").attr("checked", true);
+      $(".player1 .background").addClass("green");
+      $(".player1").addClass("border");
+
     });
 
     $("button[name=roll]").click(function(){
@@ -93,6 +98,8 @@ $(function(){
       if (aggregate >= 100) {
         $(".rounds").hide();
         $(".winner").show();
+        var audio = new Audio('media/winnerpig.mp3');
+        audio.play();
       } else {
         newGame.players[index].totalSubtotal = [];
         $("#turn-total").show();
@@ -103,9 +110,17 @@ $(function(){
         if (playerClass < newGame.players.length) {
           $(`.player${playerClass} input[name=roller]`).attr("checked", false);
           $(`.player${next} input[name=roller]`).attr("checked", true);
+          $(`.player${playerClass} .background`).removeClass("green");
+          $(`.player${playerClass}`).removeClass("border");
+          $(`.player${next} .background`).addClass("green");
+          $(`.player${next}`).addClass("border");
         } else {
           $(`.player${playerClass} input[name=roller]`).attr("checked", false);
           $(".player1 input[name=roller]").attr("checked", true);
+          $(`.player${playerClass} .background`).removeClass("green");
+          $(`.player${playerClass}`).removeClass("border");
+          $(".player1 .background").addClass("green");
+          $(".player1").addClass("border");
         }
       }
     });
